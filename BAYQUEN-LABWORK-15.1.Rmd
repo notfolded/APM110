@@ -1,0 +1,59 @@
+---
+title: "BAYQUEN-LABWORK-15.1"
+author: "Christopher Bayquen"
+date: "2023-04-17"
+output: html_document
+---
+
+
+## 15.1.1
+
+A machine produces memory sticks of varying lengths, distributed uniformly between 2 and 12 mm. Memory sticks longer than 10 mm do not meet the design criterion, and must be scrapped.
+
+(a) Calculate the probability that a memory stick will be scrapped.
+(b) Simulate 50 memory stick lengths and obtain a histogram of the simulated values. Calculate the simulated mean and variance.
+
+**A. Probability that a memory stick will be scrapped:**
+```{R}
+# 2 memory sticks are greater than 10mm in length
+# there are 10 different memory sticks in total
+P_scrapped <- (2/10)
+P_scrapped
+```
+
+**B. Simulation of 50 memory stick lengths**
+
+```{r}
+#50 memory stick lengths simulation
+lengthSim <- runif(50,2,12)
+
+#histogram plot of simulation
+hist(lengthSim, breaks = 10, xlab = "Length in mm", ylab = "Frequency")
+
+#mean and variance calculations
+mean <- mean(lengthSim)
+variance <- var(lengthSim)
+
+cat("Simulated mean of lengths:", mean)
+cat("Simulated variance of lengths :", variance)
+```
+
+## 15.1.2
+Students in an electronic engineering laboratory measure current in using an ammeter. Due to several random factors, the measurement X follows the pdf:
+
+```f(x)= 0.025x + b , 2 < x < 6```
+
+(a) Show that, for this to be a genuine probability density, b = 0.15.
+(b) Find the probability that the measurement of the current exceeds 3 A.
+(c) Find E(X)
+
+**A. Proof that b = 0.15**
+```{r}
+pdf <- function(x) {0.025*x + b}
+
+```
+
+##  15.1.3
+
+In a radio communications system, the phase difference X between the transmitter and receiver is modeled as having a uniform density in [−𝜋,+𝜋]. Find
+P(X ≤ 0) and P(X ≤ 𝜋∕2)].
