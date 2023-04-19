@@ -48,12 +48,58 @@ Students in an electronic engineering laboratory measure current in using an amm
 (c) Find E(X)
 
 **A. Proof that b = 0.15**
-```{r}
-pdf <- function(x) {0.025*x + b}
 
+to find b, we must assume that the integral of f(x) = 1.
+```{r}
+pdf <- function(x) 0.025*x + b
+firstpart_integrand <-integrate(function(x)0.025*x,2,6)
+secondpart_integrand <- (function(b)6-2*b)
+
+firstpart_integrand
+
+eqn <- function(b) 0.4 + 4*b -1
+b <- uniroot(eqn, c(0, 1))$root
+cat("Only possible value of b :", b)
+```
+
+**B. Find the probability that the measurement of the current exceeds 3**
+
+using the b = 0.15.
+```{r}
+pdf <- function(x) 0.025*x + 0.15
+integral <- integrate(pdf,3,6)
+integral
+```
+
+**c. Find E(X)**
+```{r}
+xpdf <- function(x) x*(0.025*x + 0.15)
+integral <- integrate(xpdf,2,6)
+integral
 ```
 
 ##  15.1.3
 
 In a radio communications system, the phase difference X between the transmitter and receiver is modeled as having a uniform density in [−𝜋,+𝜋]. Find
 P(X ≤ 0) and P(X ≤ 𝜋∕2)].
+
+```{r}
+a <- -pi
+b <- pi
+
+#defining the uniform density function
+pdf_x <- function(x) {
+  ifelse(x >= a & x <= b, 1/(2*pi), 0)
+}
+
+# P(X ≤ 0)
+prob1 <- integrate(pdf_x, a, 0)$value
+
+# P(X ≤ 𝜋∕2)
+prob2 <- integrate(pdf_x, a, pi/2)$value
+
+#the results
+cat("P(X ≤ 0) = ", prob1)
+cat("P(X ≤ 𝜋∕2) = ",prob2)
+
+```
